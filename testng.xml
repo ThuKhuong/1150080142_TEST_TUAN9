@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Full Framework Suite">
+
+    <listeners>
+        <listener class-name="listeners.RetryListener"/>
+    </listeners>
+
+    <parameter name="env" value="dev"/>
+
+    <test name="All Tests">
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.CartTest"/>
+            <class name="tests.LoginDataDrivenTest"/>
+            <class name="tests.UserLoginTest"/>
+            <class name="tests.CheckoutFakerTest"/>
+            <class name="tests.FlakySimulationTest"/>
+        </classes>
+    </test>
+
+</suite>

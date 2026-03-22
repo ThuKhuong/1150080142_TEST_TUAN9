@@ -1,0 +1,39 @@
+package tests;
+
+import base.BaseTest;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import pages.CartPage;
+import pages.InventoryPage;
+import pages.LoginPage;
+
+public class CartTest extends BaseTest {
+
+    private InventoryPage inventoryPage;
+
+    @BeforeMethod
+    public void initPage() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        inventoryPage = loginPage.login("standard_user", "secret_sauce");
+    }
+
+    @Test
+    public void addFirstItemToCart() {
+        CartPage cartPage = inventoryPage
+                .addFirstItemToCart()
+                .goToCart();
+
+        Assert.assertEquals(cartPage.getItemCount(), 1);
+    }
+
+    @Test
+    public void removeFirstItemFromCart() {
+        CartPage cartPage = inventoryPage
+                .addFirstItemToCart()
+                .goToCart()
+                .removeFirstItem();
+
+        Assert.assertEquals(cartPage.getItemCount(), 0);
+    }
+}
